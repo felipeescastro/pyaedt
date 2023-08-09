@@ -47,6 +47,8 @@ class Settings(object):
         self._edb_dll_path = None
         self._lsf_num_cores = 2
         self._lsf_ram = 1000
+        self._lsf_ptile = 8
+        self._lsf_osrel = 70
         self._use_lsf_scheduler = False
         self._lsf_aedt_command = "ansysedt"
         self._lsf_timeout = 3600
@@ -173,7 +175,27 @@ class Settings(object):
     @lsf_ram.setter
     def lsf_ram(self, value):
         self._lsf_ram = int(value)
+        
+    @property
+    def lsf_ptile(self):
+        """Indicates the number of processors on each host that should be allocated to the LSF job.
+        This attribute is valid only on Linux systems running LSF Scheduler."""
+        return self._lsf_ptile
 
+    @lsf_ptile.setter
+    def lsf_ptile(self, value):
+        self._lsf_ptile = int(value)
+
+    @property
+    def lsf_osrel(self):
+        """OS release used for the LSF job. This attribute is valid
+        only on Linux systems running LSF Scheduler."""
+        return self._lsf_osrel
+
+    @lsf_osrel.setter
+    def lsf_osrel(self, value):
+        self._lsf_osrel = int(value)
+    
     @property
     def lsf_timeout(self):
         """Timeout in seconds for trying to start the interactive session. The default is ``3600`` seconds."""
